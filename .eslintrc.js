@@ -10,4 +10,12 @@ module.exports = {
     'global-require': 'off',
     'import/no-extraneous-dependencies': ['off'],
   },
+  overrides: [
+    {
+      files: ['**/reducers/**/*.ts'],
+      rules: {
+        'no-param-reassign': 'off',
+      },
+    },
+  ],
 };

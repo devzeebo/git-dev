@@ -5,6 +5,8 @@ const ElectronIpcMiddleware: Middleware = (store) => {
   window.addEventListener('dispatch', (event: Event) => {
     const dispatchEvent = event as WindowDispatchEvent<any>;
 
+    console.log(event);
+
     store.dispatch({
       ...dispatchEvent.detail,
       source: 'electron',
@@ -16,7 +18,7 @@ const ElectronIpcMiddleware: Middleware = (store) => {
 
     // @ts-ignore
     if (action.source !== 'electron') {
-      window.postMessage(action);
+      window.postMessage(JSON.parse(JSON.stringify(action)));
     }
 
     return result;
