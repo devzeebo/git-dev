@@ -5,36 +5,49 @@ import { spawn } from 'child_process';
 import { isString } from 'lodash/fp';
 import repositoryStartedEvent from '#domain/repos/events/repositoryStartedEvent';
 import startRepositoryCommand from '#domain/repos/events/startRepositoryCommand';
+import type { CommandReferenceService } from 'server/domain/CommandReferenceService';
+import repositoryStoppedEvent from '#domain/repos/events/repositoryStoppedEvent';
 import type { Listener } from '.';
 
-const listener: Listener<any> = async (
-  event: IpcMainEvent,
-  { payload }: PayloadAction<Repository>,
+export default (
+  commandService: CommandReferenceService,
 ) => {
-  const { cmd, args } = isString(payload.commands.run)
-    ? {
-      cmd: payload.commands.run,
-      args: [],
-    }
-    : payload.commands.run;
+  const listener: Listener<any> = async (
+    event: IpcMainEvent,
+    { payload }: PayloadAction<Repository>,
+  ) => {
+    const { cmd, args } = isString(payload.commands.run)
+      ? {
+        cmd: payload.commands.run,
+        args: [],
+      }
+      : payload.commands.run;
 
-  const runningCommand = spawn(cmd, args, {
-    cwd: payload.path,
-  });
+    const runningCommand = spawn(cmd, args, {
+      cwd: payload.path,
+    });
 
-  runningCommand.on('error', console.error);
+    runningCommand.on('exit', () => {
+      commandService.removeCommand(runningCommand.pid!);
+      event.sender.send('to-redux', repositoryStoppedEvent({
+        repository: payload.name,
+      }));
+    });
 
-  runningCommand.on('exit', () => {
+    runningCommand.on('error', console.error);
 
-  });
+    runningCommand.on('spawn', () => {
+      commandService.addCommand(payload.name, runningCommand);
 
-  event.sender.send('to-redux', repositoryStartedEvent({
-    repository: payload.name,
-    pid: runningCommand.pid!,
-  }));
-};
+      event.sender.send('to-redux', repositoryStartedEvent({
+        repository: payload.name,
+        pid: runningCommand.pid!,
+      }));
+    });
+  };
 
-export default {
-  channel: startRepositoryCommand.type,
-  listener,
+  return {
+    channel: startRepositoryCommand.type,
+    listener,
+  };
 };

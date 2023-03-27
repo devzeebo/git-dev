@@ -1,5 +1,6 @@
 import RepositoryAvatar from '#components/RepositoryAvatar';
 import startRepositoryCommand from '#domain/repos/events/startRepositoryCommand';
+import stopRepositoryCommand from '#domain/repos/events/stopRepositoryCommand';
 import type { Repository } from '#domain/repos/models/Repository';
 import {
   Button,
@@ -29,6 +30,10 @@ const RepoCard = ({
     () => dispatch(startRepositoryCommand(repo)),
     [dispatch, repo],
   );
+  const stop = useCallback(
+    () => dispatch(stopRepositoryCommand({ repository: repo.name })),
+    [dispatch, repo],
+  );
 
   return (
     <Card>
@@ -36,12 +41,19 @@ const RepoCard = ({
         avatar={<RepositoryAvatar repository={repo} />}
         title={repo.name}
         subheader={repo.currentBranch}
-        action={<Button variant="contained" onClick={start}>Start</Button>}
+        action={(
+          <Button variant="contained" onClick={repo.pid ? stop : start}>
+            {repo.pid ? 'Stop' : 'Start'}
+          </Button>
+        )}
         onClick={toggle}
         sx={{
           cursor: 'pointer',
           '.MuiCardHeader-action': {
             m: 0,
+          },
+          ':after': {
+            content: repo.pid ? `"${repo.pid}"` : '""',
           },
         }}
       />
