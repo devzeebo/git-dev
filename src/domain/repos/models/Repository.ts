@@ -1,7 +1,11 @@
-import type { StatusResult } from 'simple-git';
+import type { Command } from './Command';
 
 export type Repository = {
   name: string,
   path: string,
-  status: StatusResult,
+  currentBranch: string,
+  pid: number | undefined,
+  commands: {
+    run: Command
+  }
 };

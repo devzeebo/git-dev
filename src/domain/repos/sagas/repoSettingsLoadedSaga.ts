@@ -7,7 +7,7 @@ import {
 import type { SettingsLoaded } from '#domain/config/events/settingsLoadedEvent';
 import settingsLoadedEvent from '#domain/config/events/settingsLoadedEvent';
 import { map } from 'lodash/fp';
-import repositoryAdded from '../events/repositoryAdded';
+import repositoryAdded from '../events/repositoryAddedEvent';
 
 function* settingsLoadedInvocation(
   { payload }: PayloadAction<SettingsLoaded>,

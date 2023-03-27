@@ -1,8 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
-import gitResponse from '../events/gitResponse';
-import repositoryAdded from '../events/repositoryAdded';
+import gitResponseEvent from '../events/gitResponseEvent';
+import repositoryAddedEvent from '../events/repositoryAddedEvent';
+import repositoryStartedEvent from '../events/repositoryStartedEvent';
 import gitStatusResponseReducer from './gitStatusResponseReducer';
 import repoRepositoryAdded from './repoRepositoryAdded';
+import repositoryStartedReducer from './repositoryStartedReducer';
 import type { State } from './State';
 
 const initialState: State = {
@@ -12,7 +14,8 @@ const initialState: State = {
 export default createReducer(
   initialState,
   (builder) => {
-    builder.addCase(repositoryAdded, repoRepositoryAdded);
-    builder.addCase(gitResponse, gitStatusResponseReducer);
+    builder.addCase(repositoryAddedEvent, repoRepositoryAdded);
+    builder.addCase(gitResponseEvent, gitStatusResponseReducer);
+    builder.addCase(repositoryStartedEvent, repositoryStartedReducer);
   },
 );

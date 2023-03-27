@@ -3,7 +3,7 @@ import simpleGit from 'simple-git';
 import type { GitCommand } from '#domain/repos/events/gitCommand';
 import gitCommand from '#domain/repos/events/gitCommand';
 import type { AllowedGitCommands } from '#domain/repos/models/AllowedCommands';
-import gitResponse from '#domain/repos/events/gitResponse';
+import gitResponse from '#domain/repos/events/gitResponseEvent';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { Listener } from '.';
 
