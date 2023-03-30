@@ -1,7 +1,7 @@
 import type { SimpleGit } from 'simple-git';
 
-const allowedCommands = {
-  status: true,
+export type AllowedGitCommands = {
+  status: (...args: never[]) => void,
+  checkout: (branchName: string) => {},
 };
-
-export type AllowedGitCommands = keyof typeof allowedCommands & keyof SimpleGit;
+export type AllowedGitCommandsKeys = keyof AllowedGitCommands & keyof SimpleGit;

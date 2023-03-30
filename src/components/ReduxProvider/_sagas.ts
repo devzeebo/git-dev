@@ -1,17 +1,21 @@
-import repoSagas from '#domain/repos/sagas';
 import type { Dispatch } from 'redux';
 import { all } from 'redux-saga/effects';
 import type { ActionPattern } from 'redux-saga/effects';
+import repoSagas from '#domain/repos/sagas';
+import storySetSagas from '#domain/storySets/sagas';
+import type { ApplicationState } from './_store';
 
 export default function* allSagas() {
-  console.log('all sagas');
   yield all([
     repoSagas(),
+    storySetSagas(),
   ]);
 }
 
-declare module 'redux-saga/effects' {
-  export function put<T>(thunk: (dispatch: Dispatch) => T): T;
+declare module 'typed-redux-saga' {
+  export function put<T>(thunk: (dispatch: Dispatch) => T): Generator<any, T, any>;
+  export function putResolve<T>(thunk: (dispatch: Dispatch) => Promise<T>): Generator<any, T, any>;
 
-  export function take<T>(pattern?: ActionPattern): T;
+  export function take<T>(pattern?: ActionPattern): Generator<any, T, any>;
+  export function select<T>(selector: (state: ApplicationState) => T): Generator<any, T, any>;
 }

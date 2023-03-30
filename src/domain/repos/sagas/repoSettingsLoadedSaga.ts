@@ -12,7 +12,6 @@ import repositoryAdded from '../events/repositoryAddedEvent';
 function* settingsLoadedInvocation(
   { payload }: PayloadAction<SettingsLoaded>,
 ) {
-  console.log('sls', payload);
   yield all(map(
     (repo) => put(repositoryAdded(repo)),
     payload.repos,
@@ -20,6 +19,5 @@ function* settingsLoadedInvocation(
 }
 
 export default function* repoSettingsLoadedSaga() {
-  console.log('rsls');
   yield takeEvery(settingsLoadedEvent.type, settingsLoadedInvocation);
 }

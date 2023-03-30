@@ -1,5 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { takeEvery, take, call } from 'redux-saga/effects';
+import { takeEvery, call } from 'redux-saga/effects';
+import { take } from 'typed-redux-saga';
 import type { AllowedGitCommands } from '../models/AllowedCommands';
 import type { GitCommand } from '../events/gitCommand';
 import gitCommand from '../events/gitCommand';
@@ -13,7 +14,7 @@ function* gitSagaInvocation<T extends AllowedGitCommands>(
     meta: { resolve },
   } = payload;
 
-  const { payload: resultPayload } = yield take<GitResponse<T>>(gitResponse.type);
+  const { payload: resultPayload } = yield* take<PayloadAction<GitResponse<T>>>(gitResponse.type);
 
   yield call(resolve, resultPayload);
 }

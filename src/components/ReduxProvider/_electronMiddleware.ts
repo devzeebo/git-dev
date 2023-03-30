@@ -5,8 +5,6 @@ const ElectronIpcMiddleware: Middleware = (store) => {
   window.addEventListener('dispatch', (event: Event) => {
     const dispatchEvent = event as WindowDispatchEvent<any>;
 
-    console.log(event);
-
     store.dispatch({
       ...dispatchEvent.detail,
       source: 'electron',
