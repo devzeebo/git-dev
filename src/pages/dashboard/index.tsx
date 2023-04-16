@@ -14,6 +14,11 @@ const DashboardPage = () => {
       <Grid
         container
         direction="column"
+        sx={{
+          height: '100%',
+          p: 1,
+        }}
+        rowSpacing={1}
       >
         {map(
           (repo) => (

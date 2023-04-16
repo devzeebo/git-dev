@@ -1,9 +1,9 @@
 import type { IpcMainEvent } from 'electron';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { CommandReferenceService } from 'server/domain/CommandReferenceService';
-import repositoryStoppedEvent from '#domain/repos/events/repositoryStoppedEvent';
-import type { StopRepositoryCommand } from '#domain/repos/events/stopRepositoryCommand';
-import stopRepositoryCommand from '#domain/repos/events/stopRepositoryCommand';
+import repositoryStoppedEvent from '#domain/entity/repos/events/repositoryStoppedEvent';
+import type { StopRepositoryCommand } from '#domain/entity/repos/events/stopRepositoryCommand';
+import stopRepositoryCommand from '#domain/entity/repos/events/stopRepositoryCommand';
 import type { Listener } from '.';
 
 export default (

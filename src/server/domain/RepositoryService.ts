@@ -1,4 +1,4 @@
-import type { Repository } from '#domain/repos/models/Repository';
+import type { Repository } from '#domain/entity/repos/models/Repository';
 
 export default class RepositoryService {
   repositories: Record<string, Repository> = {};

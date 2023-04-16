@@ -1,8 +1,8 @@
 import type { Dispatch } from 'redux';
 import { all } from 'redux-saga/effects';
 import type { ActionPattern } from 'redux-saga/effects';
-import repoSagas from '#domain/repos/sagas';
-import storySetSagas from '#domain/storySets/sagas';
+import repoSagas from '#domain/entity/repos/sagas';
+import storySetSagas from '#domain/entity/storySets/sagas';
 import type { ApplicationState } from './_store';
 
 export default function* allSagas() {

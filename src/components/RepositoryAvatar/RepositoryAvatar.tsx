@@ -1,4 +1,4 @@
-import type { Repository } from '#domain/repos/models/Repository';
+import type { Repository } from '#domain/entity/repos/models/Repository';
 import { DeveloperBoard, DeveloperBoardOff } from '@mui/icons-material';
 import { Avatar, Icon } from '@mui/material';
 import React from 'react';

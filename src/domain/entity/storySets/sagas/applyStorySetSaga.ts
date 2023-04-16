@@ -1,8 +1,8 @@
 import type { ApplicationState } from '#components/ReduxProvider/_store';
-import type { ApplyStorySet } from '#domain/dashboard/events/applyStorysetCommand';
-import applyStorysetCommand from '#domain/dashboard/events/applyStorysetCommand';
-import gitCommand from '#domain/repos/events/gitCommand';
-import type { Repository } from '#domain/repos/models/Repository';
+import type { ApplyStorySet } from '#domain/app/dashboard/events/applyStorysetCommand';
+import applyStorysetCommand from '#domain/app/dashboard/events/applyStorysetCommand';
+import gitCommand from '#domain/entity/repos/events/gitCommand';
+import type { Repository } from '#domain/entity/repos/models/Repository';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import {
   flow,

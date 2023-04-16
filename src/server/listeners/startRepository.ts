@@ -1,12 +1,12 @@
 import type { IpcMainEvent } from 'electron';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { Repository } from '#domain/repos/models/Repository';
+import type { Repository } from '#domain/entity/repos/models/Repository';
 import { spawn } from 'child_process';
 import { isString } from 'lodash/fp';
-import repositoryStartedEvent from '#domain/repos/events/repositoryStartedEvent';
-import startRepositoryCommand from '#domain/repos/events/startRepositoryCommand';
+import repositoryStartedEvent from '#domain/entity/repos/events/repositoryStartedEvent';
+import startRepositoryCommand from '#domain/entity/repos/events/startRepositoryCommand';
 import type { CommandReferenceService } from 'server/domain/CommandReferenceService';
-import repositoryStoppedEvent from '#domain/repos/events/repositoryStoppedEvent';
+import repositoryStoppedEvent from '#domain/entity/repos/events/repositoryStoppedEvent';
 import type { Listener } from '.';
 
 export default (

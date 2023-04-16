@@ -1,7 +1,7 @@
-import type { Repository } from '#domain/repos/models/Repository';
+import type { Workspace } from '#domain/entity/workspaces/models/Workspace';
 import { createAction } from '@reduxjs/toolkit';
 
 export type SettingsLoaded = {
-  repos: Repository[]
+  workspace: Workspace
 };
 export default createAction<SettingsLoaded>('config/settings-loaded');

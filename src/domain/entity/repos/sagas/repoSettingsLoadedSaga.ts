@@ -4,8 +4,8 @@ import {
   put,
   all,
 } from 'redux-saga/effects';
-import type { SettingsLoaded } from '#domain/config/events/settingsLoadedEvent';
-import settingsLoadedEvent from '#domain/config/events/settingsLoadedEvent';
+import type { SettingsLoaded } from '#domain/entity/config/events/settingsLoadedEvent';
+import settingsLoadedEvent from '#domain/entity/config/events/settingsLoadedEvent';
 import { map } from 'lodash/fp';
 import repositoryAdded from '../events/repositoryAddedEvent';
 
@@ -14,7 +14,7 @@ function* settingsLoadedInvocation(
 ) {
   yield all(map(
     (repo) => put(repositoryAdded(repo)),
-    payload.repos,
+    payload.workspace.repos,
   ));
 }
 

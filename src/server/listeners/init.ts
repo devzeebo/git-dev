@@ -1,19 +1,20 @@
-import settingsLoadedEvent from '#domain/config/events/settingsLoadedEvent';
+import settingsLoadedEvent from '#domain/entity/config/events/settingsLoadedEvent';
 import type { IpcMainEvent } from 'electron';
-import path from 'path';
-import fs from 'fs';
-import type { Listener } from '.';
+import type ConfigService from 'server/domain/ConfigService';
 
-const listener: Listener<any> = async (event: IpcMainEvent) => {
-  const configFile = path.join(process.cwd(), 'config.json');
-  if (fs.existsSync(configFile)) {
-    const config = JSON.parse(fs.readFileSync(configFile, 'utf-8'));
+export default (
+  configService: ConfigService,
+) => {
+  const listener = async (event: IpcMainEvent) => {
+    configService.loadConfig();
 
-    event.sender.send('to-redux', settingsLoadedEvent(config));
-  }
-};
+    const workspace = configService.activeWorkspace;
 
-export default {
-  channel: 'init',
-  listener,
+    event.sender.send('to-redux', settingsLoadedEvent({ workspace }));
+  };
+
+  return {
+    channel: 'init',
+    listener,
+  };
 };

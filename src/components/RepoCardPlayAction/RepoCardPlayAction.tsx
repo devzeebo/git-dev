@@ -1,11 +1,11 @@
-import type { Repository } from '#domain/repos/models/Repository';
+import type { Repository } from '#domain/entity/repos/models/Repository';
 import { Pause, PlayArrow } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import type { MouseEvent } from 'react';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import startRepositoryCommand from '#domain/repos/events/startRepositoryCommand';
-import stopRepositoryCommand from '#domain/repos/events/stopRepositoryCommand';
+import startRepositoryCommand from '#domain/entity/repos/events/startRepositoryCommand';
+import stopRepositoryCommand from '#domain/entity/repos/events/stopRepositoryCommand';
 
 export type RepoCardPlayActionProps = {
   repository: Repository

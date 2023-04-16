@@ -1,6 +1,6 @@
 import RepoCardPlayAction from '#components/RepoCardPlayAction';
 import RepositoryAvatar from '#components/RepositoryAvatar';
-import type { Repository } from '#domain/repos/models/Repository';
+import type { Repository } from '#domain/entity/repos/models/Repository';
 import {
   Card,
   CardContent,

@@ -1,4 +1,4 @@
-import type { StorySet } from '#domain/storySets/models/StorySet';
+import type { StorySet } from '#domain/entity/storySets/models/StorySet';
 
 export type State = {
   activeRepositories: string[] | null,
