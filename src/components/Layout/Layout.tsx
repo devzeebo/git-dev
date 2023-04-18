@@ -6,8 +6,7 @@ import {
   List,
   ListItem,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import applyStorysetCommand from '#domain/app/dashboard/events/applyStorysetCommand';
+import { useSelector } from 'react-redux';
 import type { ApplicationState } from '#components/ReduxProvider/_store';
 import { AutoStories, Code } from '@mui/icons-material';
 import RouterListItemButton from '#components/RouterListItemButton/RouterListItemButton';
@@ -17,22 +16,7 @@ export type LayoutProps = PropsWithChildren<{}>;
 const Layout = ({
   children,
 }: LayoutProps) => {
-  const dispatch = useDispatch();
-
   const activeStorySet = useSelector((x: ApplicationState) => x.dashboard.storySet?.name ?? 'None');
-
-  const loadStorySet = useCallback(
-    () => {
-      dispatch(applyStorysetCommand({
-        storySet: {
-          name: 'Test',
-          branchName: 'feat/test',
-          repositories: ['Git Dev 1', 'Git Dev 2'],
-        },
-      }));
-    },
-    [dispatch],
-  );
 
   return (
     <Grid container sx={{ height: '100%', width: '100%' }}>

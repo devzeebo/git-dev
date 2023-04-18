@@ -3,7 +3,7 @@ import type { ListItemButtonProps, ListItemTextProps } from '@mui/material';
 import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import type { ComponentType } from 'react';
 import React from 'react';
-import { NavLinkProps, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export type RouterListItemButtonProps = {
   to: string,

@@ -34,6 +34,9 @@ function* applyStorySet(
 ) {
   const repos = yield* select((state: ApplicationState) => state.repos.repos);
 
+  console.log(payload);
+  console.log(repos);
+
   const storySetRepos: DesiredRepoState[] = flow(
     map((repo) => (isString(repo)
       ? { repo, branchName: payload.storySet.branchName }
