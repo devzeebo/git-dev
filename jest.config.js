@@ -9,4 +9,7 @@ module.exports = {
     './src/**/*.tsx',
   ],
   coverageDirectory: './.build/coverage',
+  transform: {
+    '^.+\\.(t|j)sx?$': ['@swc/jest'],
+  },
 };
